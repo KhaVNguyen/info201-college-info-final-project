@@ -4,17 +4,25 @@ library(shiny)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Net Price "),
+  titlePanel("Net Prices of Colleges in the United States"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
-       
+      selectInput(inputId = "state",
+                  label = "State",
+                  choices = unique(state.name)),
+      sliderInput(inputId = "income",
+                  label = "Annual Income",
+                  min = 0, 
+                  max = 200000, 
+                  value = 50000, 
+                  step = 10000)
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-       plotOutput("distPlot")
+      plotOutput("netpricesplot")
     )
   )
 ))
