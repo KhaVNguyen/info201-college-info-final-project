@@ -13,7 +13,7 @@ shinyUI(fluidPage(
                   label = "State",
                   choices = unique(state.name)),
       sliderInput(inputId = "income",
-                  label = "Annual Income",
+                  label = "Your Family's Annual Income in $",
                   min = 0, 
                   max = 200000, 
                   value = 50000, 

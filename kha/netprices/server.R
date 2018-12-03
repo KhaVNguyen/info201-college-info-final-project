@@ -54,14 +54,14 @@ get_net_prices_from_income_level <-
     } else if (income_level > 30000 & income_level <= 48000) {
       pub_priv_net_prices <- select(
         net_prices,
-        avg_net_price_income_300001_to_48000_pub,
-        avg_net_price_income_300001_to_48000_priv,
+        avg_net_price_income_30001_to_48000_pub,
+        avg_net_price_income_30001_to_48000_priv,
         pub_or_priv
       ) %>%
         mutate(
           net_price = coalesce(
-            avg_net_price_income_300001_to_48000_pub,
-            avg_net_price_income_300001_to_48000_priv
+            avg_net_price_income_30001_to_48000_pub,
+            avg_net_price_income_30001_to_48000_priv
           )
         )
     } else if (income_level > 48000 & income_level <= 75000) {
