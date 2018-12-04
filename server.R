@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:zixiao/server.R
 
 # Define server logic required to draw a histogram
@@ -61,6 +62,10 @@ shinyServer(my_server)
 =======
 source("kha/net-price_server.R")
 source("zixiao/financial-aid_server.R")
+=======
+source("kha/server.R")
+source("zixiao/server.R")
+>>>>>>> a3f802f09ade7a4b6411657c19c596d2a807fc85
 shinyServer(function(input, output) {
   # Net Price
   output$net_prices_title <- renderUI({
@@ -101,8 +106,10 @@ shinyServer(function(input, output) {
       select(Institution.Name, City.location.of.institution, starts_with("Average"), starts_with("Percent"))
     names(result)[2] <- "City"
     names(result)[3] <- "Average"
-    names(result)[4] <- "Pecent% to gain"
-    result <- filter(result, Average >= input$expect)
+    names(result)[4] <- "Pecent"
+    result <- filter(result, Average >= input$expect) %>% rename("City" = "City",
+                                                                 "Average (in $)" = "Average"
+                                                                 )
   })   
   
   output$plot <- renderPlot({
