@@ -39,11 +39,9 @@ shinyServer(function(input, output) {
       select(Institution.Name, City.location.of.institution, contains("1415"))%>%
       select(Institution.Name, City.location.of.institution, starts_with("Average"), starts_with("Percent"))
     names(result)[2] <- "City"
-    names(result)[3] <- "Average"
-    names(result)[4] <- "Pecent"
-    result <- filter(result, Average >= input$expect) %>% rename("City" = "City",
-                                                                 "Average (in $)" = "Average"
-                                                                 )
+    names(result)[3] <- "Average (in $)"
+    names(result)[4] <- "Pecent Accepted"
+    result <- filter(result, "Average (in $)" >= input$expect)
   })   
   
   output$plot <- renderPlot({
