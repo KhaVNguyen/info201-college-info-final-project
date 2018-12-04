@@ -2,7 +2,7 @@ library(shiny)
 library(shinythemes)
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
-  theme = shinytheme("lumen"),
+  theme = shinytheme("readable"),
   # Application title
   titlePanel("Net Prices of Colleges in the United States"),
   
