@@ -1,19 +1,16 @@
-# AIN SHINY APPLICATION
+# MAIN SHINY APPLICATION
 
 library(shiny)
+library(shinythemes)
 
-# Define UI for application that draws a histogram
 shinyUI(navbarPage(
+  theme=shinytheme("readable"),
   # Application title
-  "College Statistics",
+  "United States Colleges Tool",
+  # -- Net Prices Page -- #
   tabPanel("Net Prices",
-           
-           # Sidebar with a slider input for number of bins
            fluidPage(
-             # Application title
              titlePanel("Net Prices of Colleges in the United States"),
-             
-             # Sidebar with a slider input for number of bins
              fluidRow(
                sidebarPanel(
                  selectInput(
@@ -50,9 +47,10 @@ shinyUI(navbarPage(
                )
              )
            )),
+  # -- Financial Aid Page -- #
   tabPanel("Financial Aid",
            fluidPage(
-             titlePanel("Financial aids for student in the United States"),
+             titlePanel("Financial Aid for Students in the United States"),
              sidebarLayout(
                sidebarPanel(
                  selectInput(

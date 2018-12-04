@@ -14,7 +14,7 @@ shinyServer(function(input, output) {
   
   output$colleges_in_budget_title <- renderUI({
     colleges_in_budget_title <- h2(paste("Colleges in", input$chosen_state, 
-                                         "that fit your budget"))
+                                         "in your budget"))
   })
   
   output$colleges_in_budget_table = renderDataTable({
@@ -28,7 +28,7 @@ shinyServer(function(input, output) {
     get_data <- filter(data, State == input$state)
     if(input$radio == 0){
       get_data <- select(get_data,Institution.Name, City.location.of.institution, contains("loan"))
-    } else{
+    } else{financialaid
       get_data <- select(get_data,Institution.Name, City.location.of.institution, contains("pell"))
     }
     get_data
