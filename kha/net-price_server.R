@@ -4,7 +4,7 @@ library(ggplot2)
 library(DT)
 
 net_prices_dataset <-
-  read.csv("net-price.csv", stringsAsFactors = FALSE)
+  read.csv("kha/net-price.csv", stringsAsFactors = FALSE)
 
 # Generate box and whisker plot for net prices of colleges
 plot_net_prices_data <-
@@ -143,26 +143,3 @@ get_net_prices_from_income_level <-
       na.omit()
     return (pub_priv_net_prices)
   }
-
-# Define server logic required to draw a histogram
-shinyServer(function(input, output) {
-  output$net_prices_title <- renderUI({
-    net_prices_title <- h2(paste("Statistics of all Colleges in", input$state))
-  })
-  
-  output$net_prices_plot <- renderPlot({
-    net_prices_data <-
-      get_net_prices_data(net_prices_dataset, input$state, input$income)
-    plot_net_prices_data(net_prices_data, input$state)
-  })
-  
-  output$colleges_in_budget_title <- renderUI({
-    colleges_in_budget_title <- h2(paste("Colleges in", input$state, 
-                                         "that fit your budget"))
-  })
-  
-  output$colleges_in_budget_table = renderDataTable({
-    get_net_prices_data_under_budget(net_prices_dataset, input$state, input$income, input$budget)
-  })
-  
-})
