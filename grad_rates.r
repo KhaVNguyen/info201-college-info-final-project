@@ -15,5 +15,5 @@ search_by_state <- function(input_state){
 }
 
 ## cleaning up data
-grad_rate <- grad_rate %>% na.omit(grad_rate) %>% 
-  group_by(State)
+grad_rate <- grad_rate %>% na.omit(grad_rate) 
+
