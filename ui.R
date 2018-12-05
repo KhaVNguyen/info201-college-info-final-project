@@ -137,12 +137,32 @@ shinyUI(navbarPage(
          college options and general information about said colleges in a quick and easily-understandable format. 
          We want to provide them with as much information as possible without being too overwhelming so that they can make an informed decision about which college to attend."),
     h2("Where did the data come from?"),
-    tags$p(class = "lead", HTML(paste0(
+    tags$p(HTML(paste0(
       "We used the ", a(href = "http://tuitiontracker.org/", "Tuition Tracker dataset, "),
       "which is 'powered by data provided by the U.S. department of Education from IPEDS, the 
                                    Integrated Postsecondary Education Data System. From there we will be using the 'financial aid,' 'graduation rates,' and 'net price' 
                                    datasets. Each individual data set lists for over 3400 individual colleges in the United States. 
                                    We found the data set by searching for data sets related to student on reddit.com/r/datasets."
-    )))
+    
+      ))),
+    h2("What questions did we want to answer?"),
+    tags$ul(
+      tags$li("What are the statistics for lowest, mean, and highest net prices for colleges in the given state?"), 
+      tags$li("What are the statistics for lowest,mean and highest federal state local or institutional grant aid for colleges in the given state?"), 
+      tags$li("What are the statistics for the net graduation rate per year for each college in a given state?")
+    ),
+    h2("What users might be able to find through using our tool ... "),
+    tags$p(HTML(paste0("The following might be what a user might find from selecting ", strong("Washington"), " state."))),
+    tags$ul(
+      tags$li("With a family income level of $100,000 a year, the median average net price is roughly $25,000 for private schools
+              and $13,000 for public schools. The lowest cost private school in Washington costs "),
+      tags$li("User can view a list of colleges under a budget for example of $7000, which are the following:
+              Gadsden State Community College, Snead State Community College, Spring Hill College"),
+      tags$li("User can compare how much a college offers in financial aid money in comparison to the state's averages
+              in recent years. We noticed the financial aid averages in the state of Washington have
+              stayed relatively the same over the past 8 years."),
+      tags$li("Washington's colleges' graduation rates tend to be around roughly 58% over the past 6 years, 
+              with the lowest of 53 in 2013")
+    )
   )
 ))
