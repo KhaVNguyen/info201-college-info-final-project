@@ -57,7 +57,7 @@ shinyUI(navbarPage(
                  selectInput(
                    inputId = "state",
                    label = "State",
-                   choices = state.abb
+                   choices = unique(state.name)
                  ),
                  radioButtons(
                    "radio",
@@ -67,7 +67,7 @@ shinyUI(navbarPage(
                  ),
                  sliderInput(
                    inputId = "expect",
-                   label = "Your expectation $",
+                   label = "Your expectation (in $)",
                    min = 0,
                    max = 15000,
                    value = 3000,
