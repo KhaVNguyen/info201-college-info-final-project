@@ -1,27 +1,34 @@
+# reference server logic from kha
 source("kha/server.R")
+# reference server logic from zixiao
 source("zixiao/server.R")
 shinyServer(function(input, output) {
-  # Net Price
+  # -- Net Price -- #
+  
+  # Net Prices Table Title
   output$net_prices_title <- renderUI({
     net_prices_title <- h2(paste("Statistics of all Colleges in", input$chosen_state))
   })
   
+  # Net Prices Box and Whisker Plot 
   output$net_prices_plot <- renderPlot({
     net_prices_data <-
       get_net_prices_data(net_prices_dataset, input$chosen_state, input$income)
     plot_net_prices_data(net_prices_data, input$chosen_state)
   })
   
+  # Net Prices Colleges in Budget Title
   output$colleges_in_budget_title <- renderUI({
     colleges_in_budget_title <- h2(paste("Colleges in", input$chosen_state, 
                                          "in your budget"))
   })
   
+  # Net Prices Colleges in Budget Table
   output$colleges_in_budget_table = renderDataTable({
     get_net_prices_data_under_budget(net_prices_dataset, input$chosen_state, input$income, input$budget)
   })
   
-  # Financial - Aid 
+  # --  Financial - Aid -- #
   getData <- reactive({
     data <- read.csv("zixiao/financial-aid.csv", stringsAsFactors = FALSE)
     ##filter the data according to user select
