@@ -28,7 +28,7 @@ shinyServer(function(input, output) {
     get_data <- filter(data, State == input$state)
     if(input$radio == 0){
       get_data <- select(get_data,Institution.Name, City.location.of.institution, contains("loan"))
-    } else{financialaid
+    } else {
       get_data <- select(get_data,Institution.Name, City.location.of.institution, contains("pell"))
     }
     get_data
