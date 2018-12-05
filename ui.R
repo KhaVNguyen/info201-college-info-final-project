@@ -2,6 +2,7 @@
 
 library(shiny)
 library(shinythemes)
+library(DT)
 
 shinyUI(navbarPage(
   theme=shinytheme("readable"),

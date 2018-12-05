@@ -1,5 +1,3 @@
-
-# Define server logic required to draw a histogram
 library("shiny")
 library("lubridate")
 library("dplyr")
@@ -8,3 +6,5 @@ library("R.utils")
 library("data.table")
 library("ggplot2")
 library("maps")
+
+# rest moved to ui.R
