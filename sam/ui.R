@@ -23,7 +23,7 @@ my_ui <- fluidPage(
       htmlOutput("gradTitle"),
       dataTableOutput("gradtable"),
       htmlOutput("plotTitle"),
-      plotOutput("plot")
+      plotOutput("gradplot")
     )
   )
 )
