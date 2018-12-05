@@ -71,6 +71,7 @@ shinyServer(function(input, output) {
     plot <- ggplot(data = result, aes(x = year, y = State_average)) +
       geom_bar(stat="identity", fill="steelblue")+
       geom_text(aes(label=mean), vjust=-0.3, size=3.5)+
+      labs(x = "Year", y = "State Average") + 
       theme_minimal()
     plot
   })
@@ -79,7 +80,7 @@ shinyServer(function(input, output) {
                            "that fit your expectation"))
   })
   output$financialPlotTitle <- renderUI({
-    plotTitle <- h2(paste("Average level in", input$state_input))
+    plotTitle <- h2(paste("Average amount of financial aid given in", input$state_input, "(in $)"))
   }) 
   
   getGrad <- reactive({
