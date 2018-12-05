@@ -5,8 +5,8 @@ account: khavnguyen
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 604006
-bundleId: 1740915
+bundleId: 1741629
 url: https://khavnguyen.shinyapps.io/info201-college-info-final-project/
-when: 1543968731.93201
+when: 1543991346.80984
 asMultiple: FALSE
 asStatic: FALSE

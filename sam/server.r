@@ -1,5 +1,5 @@
 
-# Define server logic required to draw a histogram
+# load libraries
 library("shiny")
 library("dplyr")
 library("data.table")

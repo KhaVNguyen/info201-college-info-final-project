@@ -1,9 +1,12 @@
 # reference server logic from kha
 source("kha/server.R")
-# reference server logic from zixiao
+# load libraries required by server logic from zixiao
 source("zixiao/server.R")
+# load libraries required by server logic from sam 
 source("sam/server.R")
+
 shinyServer(function(input, output) {
+  
   # -- Net Price -- #
   
   # Net Prices Table Title
@@ -50,7 +53,7 @@ shinyServer(function(input, output) {
       select(Institution.Name, City.location.of.institution, starts_with("Average"), starts_with("Percent"))
     names(result)[1] <- "Institution Name"
     names(result)[2] <- "City"
-    names(result)[3] <- "Average (in $)"
+    names(result)[3] <- "Average (in US $)"
     names(result)[4] <- "Pecent Accepted"
     result <- result%>%
       filter(!is.na(result[3]))
@@ -75,7 +78,7 @@ shinyServer(function(input, output) {
     plot <- ggplot(data = result, aes(x = year, y = State_average)) +
       geom_bar(stat="identity", fill="steelblue")+
       geom_text(aes(label=mean), vjust=-0.3, size=3.5)+
-      labs(x = "Year", y = "State Average") + 
+      labs(x = "Year", y = "State Average (in US $)") + 
       theme_minimal()
     plot
   })
@@ -88,14 +91,15 @@ shinyServer(function(input, output) {
   
   ## Financial aid plot title
   output$financialPlotTitle <- renderUI({
-    plotTitle <- h2(paste("Average amount of financial aid given in", input$state_input, "(in $)"))
+    plotTitle <- h2(paste("Average amount of financial aid given in", input$state, "(in US $)"))
   }) 
   
   # --  Graduation Rates -- #
   getGrad <- reactive({
     data <- read.csv("sam/grad-rates.csv", stringsAsFactors = FALSE)
     ## Filter the data according to user select
-    get_data <- filter(data, State == input$state_input)
+    state_abbrev = state.abb[match(input$state_input, state.name)]
+    get_data <- filter(data, State == state_abbrev)
     names(get_data)[1] <- "Institution_Name"
     get_data
   })
@@ -106,13 +110,14 @@ shinyServer(function(input, output) {
     names(get_data)[8] <- "Graduation_Rate_2016"
     result <- get_data%>%
       select(Institution_Name, City,Graduation_Rate_2016)
-    result <- filter(result, Graduation_Rate_2016 >= input$grad)
+    result <- filter(result, Graduation_Rate_2016 >= input$grad) %>% 
+      rename("Institution Name" = Institution_Name, "City" = City, "Graduation Rate in 2016" = Graduation_Rate_2016)
   })   
   
   ## generates title for the tab 
   output$gradTitle <- renderUI({
     tableTitle <- h2(paste("Colleges Graduation rate in", input$state_input, 
-                           "that fit your expectation"))
+                           "that fit your expected graduation rate"))
   })
   ## generates title for the plot
   output$gradPlotTitle <- renderUI({
@@ -136,6 +141,7 @@ shinyServer(function(input, output) {
     ## Created the plot to display graduation rate of recent years 
     plot <- ggplot(data = df, aes(x = year, y = average)) +
       geom_bar(stat="identity", fill="steelblue")+
+      labs(x = "Year", y = "Average (in %)") +
       geom_text(aes(label= average), vjust=-0.3, size=3.5)+
       theme_minimal()
     plot

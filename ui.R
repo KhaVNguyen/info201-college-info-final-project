@@ -22,7 +22,7 @@ shinyUI(navbarPage(
           ),
           sliderInput(
             inputId = "income",
-            label = "Your Family's Annual Income in $",
+            label = "Your Family's Annual Income in US $",
             min = 0,
             max = 200000,
             value = 50000,
@@ -36,7 +36,7 @@ shinyUI(navbarPage(
         sidebarPanel(
           sliderInput(
             inputId = "budget",
-            label = "Your Budget (in $)",
+            label = "Your Budget (in US $)",
             min = 0,
             max = 75000,
             value = 30000,
@@ -73,7 +73,7 @@ shinyUI(navbarPage(
           ##Slider to choose the expectation aid
           sliderInput(
             inputId = "expect",
-            label = "Your expectation (in $)",
+            label = "Your expectation (in US $)",
             min = 0,
             max = 15000,
             value = 3000,
@@ -94,14 +94,14 @@ shinyUI(navbarPage(
   tabPanel(
     "Graduation Rates",
     fluidPage(
-      titlePanel("Student graduation rate in the United States"),
+      titlePanel("Student Graduation Rate in the United States"),
       sidebarLayout(
         sidebarPanel(
           ## Allow users to choose a State to inspect
           selectInput(
             inputId = "state_input",
             label = "State",
-            choices = state.abb
+            choices = unique(state.name)
           ),
           
           ## A slider that filters out schools under the selected rate
