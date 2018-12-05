@@ -30,9 +30,9 @@ shinyServer(function(input, output) {
   })
   
   # --  Financial - Aid -- #
+  ##Filter the data according to the user input
   getData <- reactive({
     data <- read.csv("zixiao/financial-aid.csv", stringsAsFactors = FALSE)
-    ##filter the data according to user select
     state_abbrev = state.abb[match(input$state, state.name)]
     get_data <- filter(data, State == state_abbrev)
     if(input$radio == 0){
@@ -43,6 +43,7 @@ shinyServer(function(input, output) {
     get_data
   })
   
+  ##Financial aid output data table
   output$table <- renderDataTable({
     result <- getData()%>%
       select(Institution.Name, City.location.of.institution, contains("1415"))%>%
@@ -51,9 +52,12 @@ shinyServer(function(input, output) {
     names(result)[2] <- "City"
     names(result)[3] <- "Average (in $)"
     names(result)[4] <- "Pecent Accepted"
-    result <- filter(result, "Average (in $)" >= input$expect)
+    result <- result%>%
+      filter(!is.na(result[3]))
+    result <- filter(result, result[3] >= input$expect)
   })   
   
+  ## Average financial Aid Bar plot output
   output$plot <- renderPlot({
     r <- getData()%>%
       select(contains("Average"))
@@ -75,10 +79,14 @@ shinyServer(function(input, output) {
       theme_minimal()
     plot
   })
+  
+  ##Financial aid data table titile
   output$tableTitle <- renderUI({
     tableTitle <- h2(paste("Colleges in", input$state, 
                            "that fit your expectation"))
   })
+  
+  ##Financial aid plot titile
   output$financialPlotTitle <- renderUI({
     plotTitle <- h2(paste("Average amount of financial aid given in", input$state_input, "(in $)"))
   }) 
