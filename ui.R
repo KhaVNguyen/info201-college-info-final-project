@@ -57,17 +57,20 @@ shinyUI(navbarPage(
       titlePanel("Financial Aid for Students in the United States"),
       sidebarLayout(
         sidebarPanel(
+          ## Choose the state to check
           selectInput(
             inputId = "state",
             label = "State",
             choices = unique(state.name)
           ),
+          ## A radio button to chooce the Financial aid type
           radioButtons(
             "radio",
             label = "Select Federal student loans/Pell Grant",
             choices = list("Federal student loans" = 0, "Pell Grant" = 1),
             selected = 0
           ),
+          ##Slider to choose the expectation aid
           sliderInput(
             inputId = "expect",
             label = "Your expectation (in $)",
@@ -77,6 +80,7 @@ shinyUI(navbarPage(
             step = 1000
           )
         ),
+        ##output data table and bar plot
         mainPanel(
           htmlOutput("tableTitle"),
           dataTableOutput("table"),
