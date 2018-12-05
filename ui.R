@@ -90,18 +90,21 @@ shinyUI(navbarPage(
       )
     )
   ),
+  # -- Graduation Rates Page -- #
   tabPanel(
     "Graduation Rates",
     fluidPage(
       titlePanel("Student graduation rate in the United States"),
       sidebarLayout(
         sidebarPanel(
+          ## Allow users to choose a State to inspect
           selectInput(
             inputId = "state_input",
             label = "State",
             choices = state.abb
           ),
           
+          ## A slider that filters out schools under the selected rate
           sliderInput(
             inputId = "grad",
             label = "Your expected graduation rate",
@@ -111,6 +114,7 @@ shinyUI(navbarPage(
             step = 5
           )
         ),
+        ## plots the trend of the average graduation rate of the selected state over the years
         mainPanel(
           htmlOutput("gradTitle"),
           dataTableOutput("gradtable"),
